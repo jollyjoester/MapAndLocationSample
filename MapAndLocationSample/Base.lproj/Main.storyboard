@@ -20,9 +20,46 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="96J-4i-yN3">
+                                <rect key="frame" x="294" y="742" width="100" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZp-wp-OV3">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="38"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="記録！"/>
+                                        <connections>
+                                            <action selector="tappedRecord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S6b-0Q-sJt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxI-Nr-yra">
+                                        <rect key="frame" x="0.0" y="38" width="100" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="ピン表示"/>
+                                        <connections>
+                                            <action selector="tappedDisplayAnnotations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vuy-2m-6Yd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySX-en-voA">
+                                        <rect key="frame" x="0.0" y="69" width="100" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="ピン削除"/>
+                                        <connections>
+                                            <action selector="tappedDeleteAnnotations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2XT-Wr-5Gd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="bvs-R3-w4G"/>
+                                    <constraint firstAttribute="width" constant="100" id="x82-zB-oPI"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="96J-4i-yN3" secondAttribute="trailing" constant="20" id="How-ck-geT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="96J-4i-yN3" secondAttribute="bottom" constant="20" id="maL-Yn-ZmP"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="sad-dF-Rb7" id="chq-yu-dBh"/>
