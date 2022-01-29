@@ -11,6 +11,8 @@ import MapKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -21,7 +23,8 @@ class ViewController: UIViewController {
         locationManager.startUpdatingLocation()
         locationManager.requestWhenInUseAuthorization()
         
-        
+        mapView.showsUserLocation = true
+
     }
 
 
@@ -30,9 +33,19 @@ class ViewController: UIViewController {
 extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let longitude = locations.last?.coordinate.longitude.description
-        let latitude = locations.last?.coordinate.latitude.description
-        print("longitude \(longitude)")
-        print("latitude \(latitude)")
+        
+        let location: CLLocation? = locations.last
+        
+        if let location = location {
+            let coordinate = location.coordinate
+
+            let longitude = coordinate.longitude
+            let latitude = coordinate.latitude
+            print("longitude \(longitude)")
+            print("latitude \(latitude)")
+            
+            mapView.setCenter(coordinate, animated: true)
+            
+        }
     }
 }
