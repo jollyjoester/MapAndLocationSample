@@ -292,6 +292,8 @@
 				DEVELOPMENT_TEAM = AYVYQABB6U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MapAndLocationSample/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "常に位置情報使いまっせ〜";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報使いまっせ〜";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -320,6 +322,8 @@
 				DEVELOPMENT_TEAM = AYVYQABB6U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MapAndLocationSample/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "常に位置情報使いまっせ〜";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報使いまっせ〜";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
