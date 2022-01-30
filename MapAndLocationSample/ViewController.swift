@@ -12,6 +12,9 @@ import MapKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    var recordStarted: Bool = false
     
     var locationInfoList: [LocationInfo] = []
     var currentLocation: CLLocationCoordinate2D?
@@ -33,6 +36,12 @@ class ViewController: UIViewController {
         let span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region: MKCoordinateRegion = MKCoordinateRegion(center: mapView.centerCoordinate, span: span)
         mapView.region = region
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        mapView.setCenter(mapView.userLocation.coordinate, animated: true)
     }
     
     private func addAnnotations(with locationInfoList: [LocationInfo]) {
@@ -64,21 +73,52 @@ class ViewController: UIViewController {
         let line = MKPolyline(coordinates: userLocationLogs, count: userLocationLogs.count)
         mapView.addOverlay(line)
     }
+        
+    @IBAction func tappedStartRecording(_ sender: UIButton) {
+        // recordStartedフラグをONにする
+        recordStarted = true
+        
+        // Labelの表示を変える
+        statusLabel.text = "記録中！！！"
+        statusLabel.textColor = UIColor.red
+        statusLabel.font = .systemFont(ofSize: 20, weight: .bold)
+    }
     
-    @IBAction func tappedRecord(_ sender: UIButton) {
+    @IBAction func tappedFinishRecording(_ sender: UIButton) {
+        // recordStartedフラグをOFFにする
+        recordStarted = false
+        
+        // Labelの表示を変える
+        statusLabel.text = "「記録スタート！」ボタンを押してね"
+        statusLabel.textColor = UIColor.black
+        statusLabel.font = .systemFont(ofSize: 17, weight: .regular)
+    }
+    
+    @IBAction func tappedAddCheckPoint(_ sender: UIButton) {
         
         if let currentLocation = currentLocation {
             let locationInfo = LocationInfo(coordinate: currentLocation, recordedAt: Date())
             locationInfoList.append(locationInfo)
         }
     }
-    
+
     @IBAction func tappedDisplayAnnotations(_ sender: UIButton) {
         self.addAnnotations(with: locationInfoList)
     }
 
     @IBAction func tappedDisplayRoute(_ sender: UIButton) {
         self.addRoute(with: userLocationLogs)
+    }
+    
+    @IBAction func tappedDeleteData(_ sender: UIButton) {
+        
+        // データを記録したリストを空にする
+        locationInfoList = []
+        userLocationLogs = []
+        
+        // 追加したAnnotationsやOverlayを削除
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
     }
     
 }
@@ -94,14 +134,18 @@ extension ViewController: CLLocationManagerDelegate {
             let coordinate = location.coordinate
 
             currentLocation = coordinate
-            userLocationLogs.append(coordinate)
             
+            // 記録スタートされてるときのみログに追加する
+            if recordStarted {
+                userLocationLogs.append(coordinate)
+            }
+                        
             let longitude = coordinate.longitude
             let latitude = coordinate.latitude
             print("longitude \(longitude)")
             print("latitude \(latitude)")
             
-            mapView.setCenter(coordinate, animated: true)
+//            mapView.setCenter(coordinate, animated: true)
         }
     }
 }
